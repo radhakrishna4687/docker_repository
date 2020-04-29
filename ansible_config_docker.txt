@@ -1,0 +1,52 @@
+#How to enable ssh: By installing the Openssh-servers ans clients module install in ubuntu
+1.Steps: Login into the dockerhub search ("ubnare/centos-with-ssh") and pull the docker image
+
+cmd:docker pull ubnare/centos-with-ssh
+
+step2: to runthe docker images
+
+CMD: docker -itd --name ansible_master ubuntu /bin/bash
+
+CMD: docker -itd --name ansible_node-1 ubuntu /bin/bash
+
+CMD: docker -itd --name ansible_node-2 ubuntu /bin/bash
+
+STEP3: Execute the docker container 
+
+CMD: docker exec -it ansible_master bash
+
+CMD: docker exec -it ansible_node-1 bash
+
+CMD: docker exec -it ansible_node-2 bash
+
+STEP4: To login the ansible_master container and install package python,ansible,openssh-client,iputils-ping,vim,nano,-y
+
+CMD: apt install python ansible openssh-client iputils-ping vim nano -y
+ 
+STEP5: To login the ansible_node-1 container and install package python,ansible,openssh-server,iputils-ping,vim,nano,-y
+
+CMD:  apt install python ansible openssh-server iputils-ping vim nano -y
+
+STEP5: To login the ansible_node-2 container and install package python,ansible,openssh-server,iputils-ping,vim,nano,-y
+
+CMD:  apt install python ansible openssh-server iputils-ping vim nano -y
+
+STEP6: To configure the changes inthe ansible_master  paramerts in sshd.cong
+--> cd /etc/ssh
+--->vim sshd_config
+----> PermitRootLogib yes  --->thse will be root
+
+STEP7: login into containers  as the rrot password chnages 
+CMD: passwd root
+new password: root
+
+SSH_KEYGEN  Genarate in ansible master ans added the ssh keys to ansible_nodes and add the SSH
+
+STEP7:
+ssh-keygen
+ssh-copy-id root@dockernode1,2 ip ids
+
+step8:docker inspect containers to inspect the ip address
+
+
+

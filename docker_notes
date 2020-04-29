@@ -1,0 +1,16 @@
+#Steps to create the docker files
+Step1: Create a file named Dockerfile
+ 1.step: FROM base image --> Ubuntu ##IF you don't want the base image use SCRATCH --> This is an empty image to build from the scratch.
+ step2: Add instruction in Dockerfile
+ step3: Build docker to create images
+ step4:Run the docker image to container
+
+ COMMANDS:
+
+ 1.docker build
+ 2.docker build -t imageName:Tag directoryof Dockerfile
+3.docker run image
+
+
+
+
