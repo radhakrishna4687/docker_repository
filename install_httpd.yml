@@ -1,0 +1,9 @@
+#!/usr/bin/ansible-playbook
+- hosts: all
+  #become: yes
+  tasks:
+  - name: Installing nano editor
+    apt: name=vim state=present
+  - name: Installing httpd
+    apt: name=httpd state=latest
+    

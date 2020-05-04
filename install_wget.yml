@@ -1,0 +1,10 @@
+---
+ - host: all
+   task:
+    - apt: name=weget state=present
+    
+ - hosts: webserver
+   become: yes
+   tasks:
+   - name: Install apache 2
+     apt: name=apache2 update_cache=yes state=l   

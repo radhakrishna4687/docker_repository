@@ -1,0 +1,54 @@
+Ansible Variables ?
+Ans: what is variable? 
+1.--> Variable are used to store values.
+2.in ansible we can define varibales --> In ansible variables names should be letters, numbers underscores(_) and the should be always start wth letters.
+Types of variable:
+1.defalut variables
+2.Inventory variables
+3. facts and local variables
+4.registered variables
+
+1.defalut variablaes
+	1.inventory_hostnames
+	2.inventory_hostname_short()
+	3.group/group.keys()
+
+
+
+-------------------------------------
+simple playbooks;
+-----------------
+1.start with three hifens(---)
+ex: ---
+     - hosts: all
+       gather_facts: false
+       become: yes
+       tasks:
+        - name: Installing the wget pkgs
+          apt: name=wget state=latest
+        - name: installling apache2
+          apt: name=apache2 update_cache=yes state=latest   	
+
+Basic keypoins of playbooks:
+-----------------------------
+hosts,tasks,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

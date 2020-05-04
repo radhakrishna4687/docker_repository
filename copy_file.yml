@@ -1,0 +1,10 @@
+---
+ - name: This playbook is run simple tasks
+   hosts: web
+   gather_facts: false
+   tasks:
+    - name: THia task exectues the copy the file from amsger to nodes
+      copy: src=web.xml dest=web.xml
+    - name: This taskforcreating the empty file.
+      file: path=rk.txt state=touch
+      

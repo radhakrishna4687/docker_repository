@@ -1,0 +1,25 @@
+---
+ - name: This is a play to installl apache2 andwget pakg in nodes
+   hosts: nodes
+   gather_facts: no
+   tasks:
+    - name: Installing wget pkg
+      apt: name=wget state=latest
+    - name: Installinh apache2 server
+      apt: name=apache2 update_cache=yes state=latest  
+
+
+
+
+
+
+
+ - name: This is a play to installl apache2 andwget pakg in nodes
+   host: nodes
+   gather_facts: no
+   task:
+   - name: INstalling wget pkg
+     apt: name=weget state=present
+   - name: Install apache 2
+     apt: name=apache2 update_cache=yes state=latest
+        
