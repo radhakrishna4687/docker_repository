@@ -1,0 +1,5 @@
+---
+ - hosts: all
+   var: x=23
+   tasks:
+   - debug: var=x

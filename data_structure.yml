@@ -1,0 +1,11 @@
+---
+ - hosts: all 
+   vars:
+    x: 345
+    pakgs: ['vim', 'nano', 'nginx'] #list
+    web_server: {'linux', 'apache2', 'ubuntu'} #web_server is variable and it is dictionary  or mapping 
+    
+    format
+   tasks:
+   - debug: var=pakgs
+   - debug: var=web_server 

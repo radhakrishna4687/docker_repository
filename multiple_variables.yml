@@ -1,0 +1,12 @@
+---
+ - hosts: all
+   vars:
+    x: 23
+    my_number: 9490331649
+    my_name: "Radhakrishna"
+   tasks:
+    - debug:
+       msg:
+         - "The value of x is: {{x}} and type: {{x | type_debug}}"
+         - "The value of my my_number is: {{my_number}} and type: {{my_number | type_debug}}"
+         - "'my name is: {{my_name}} and type: {{my_name | type_debug}}""
