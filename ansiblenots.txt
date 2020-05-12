@@ -35,6 +35,157 @@ hosts,tasks,
 
 
 
+ansible_notes:
+--------------
+Creating the variables:
+-------------------------
+variables: means it stores the data vales in avriables
+Data Types:
+1.int(x: 34)
+foat(x: 34.456)
+string(myname: "radhakrishna", my_name; radhakrishna)
+bool( x: true, y:false, z: True, p: False, q: yes, q: no)
+------------
+---> Ansible data structures and data collection:
+Data sructre or dtat collections:
+--> are used to store multiple data/values.
+1.scalar
+2.sequence or list[]
+3.dictionay or mappping
+--> i want to install multiple pkgs:
+example:
+---
+ - hosts: all 
+   vars:
+    x: 345
+    pakgs: ['vim', 'nano', 'nginx'] #list
+    web_server: {'linux', 'apache2', 'ubuntu'} #web_server is variable and it is dictionary  or mapping 
+    
+    format
+   tasks:
+   - debug: var=pakgs
+   - debug: var=web_server 
+--------------------------------------------------
+By  using register and set_facts to find out the bash in linux mchine :
+
+Register:
+by using the register key to store the values: by executing the tasks
+ex: tasks:
+   - shell: "bash --version"
+   #to store the varianble in registre keys:
+and then assing the value to store used thr register key: ex: 
+
+  register: bash_var #here to store the value in register key is bash_var
+  #but it not showing the output,
+   Debug moduleis used to print the output: in that case used the debug module to printout output
+   - debug: var=bash_var    
+==========================================
+--
+ - hosts: all
+   gather_facts: no
+   tasks:
+   - shell: "bash --version"
+   #to store the varianble in registre keys:
+     register: bash_var #here to store the value in register key is bash_var
+  #but it not showing the output,in that case used the debug module to printout output
+   - debug: var=bash_var.stdout.split("\n")[0].split()
+   # here using the python split module for required outputs using split('\n')[0](#indexnumber).split() for space
+
+#here always write a  long sytax like var=bash_var.stdout.split("\n")[0].split() 
+#insted fo these one create the variablea ans store the variable value into it. by using set fact
+==================================================================
+set_fact module is used to define a new variables
+---
+ - hosts: all
+   gather_facts: no
+   tasks:
+   - shell: "bash --version"
+   #to store the varianble in registre keys:
+     register: bash_var #here to store the value in register key is bash_var
+   #here always write a  long sytax like var=bash_var.stdout.split("\n")[0].split() 
+#insted fo these one create the variablea ans store the variable value into it. by using set fact
+#set_facts: used for making simple variables
+  - set_facts:
+      bash_version: {bash_var.stdout.split("\n")[0].split()[3]} 
+  
+  #but it not showing the output,in that case used the debug module 
+  to printout output
+  # here using the python split module for required outputs using split('\n')[0](#indexnumber).split() for space
+
+   - debug: var=bash_version
+   -----------------------------
+   How to read and print variable using ansible playbooks?
+   Ans by using vars module and debug for print variable.
+   example:
+
+  ---
+ - hosts: all
+   vars:
+    x: 23456
+    name: "krishnaradha"
+   tasks:
+   - debug:
+      msg:
+       - "the variable vale is {{x}}"
+       - "the name of the student is {{name}}"   
+===============================================
+Dynamic allocation of variable to read the variable values whie running a process by using vars_prompt
+example: 
+--
+ - hosts: all
+   vars:
+    x: 23456
+    name: "krishnaradha"
+   vars_prompt:
+    name: y
+    prompt: Enter the value for y
+    private: false
+   tasks:
+   - debug:
+      msg:
+       - "the variable vale is {{x}}"
+       - "the name of the student is {{name}}"   
+       - "the var is value is {{y}}"
+-----------------------------------------------------
+example: foe suppose i want to enter the values fo user name ans password while running the ansible-playbooks.
+Here the var_prompt is important 
+and prompt key word is importnant to display runtime 
+
+---
+ - hosts: all
+   vars_prompt:
+    - name: user_name
+      prompt: Enter Username 
+      private: false
+    - name: password
+      prompt: Enter the password
+      private: yes
+   tasks:
+   - debug:
+      msg: "THe username is: {{user_name}} and the password is: {{password}}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
