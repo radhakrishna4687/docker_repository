@@ -16,3 +16,5 @@
          - "the max value of z is : {{z|max}}"
          - "The min value of z is: {{z|min}}"
          - "{{x.split()}}"
+         - "{{z |random}}" #to give output for random numbers
+         - "{{ z|random}} * * * * root /script/from/cron"
