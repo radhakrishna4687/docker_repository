@@ -1,0 +1,23 @@
+---
+ - hosts: nodes 
+   gather_facts: false 
+   vars: 
+     x: ['krishna','radha',3.4,4,566555,'j','hari',0.466]
+     y: 100
+     z: [2344,5444,5543344,555566555,9908.9,9,89,67]
+     a: 343
+   tasks:
+    - debug:
+       msg:
+        - "{{x |random}}"
+        - "{{z |random}}"
+        - "{{y |random(step=2) }}"
+        - "{{y |random(start=1,step=5) }}"
+        - "{{x | shuffle }}"
+        - "{{a | log }}"
+        - "{{a | log(10) }}"
+        - "{{a | pow(3) }}"
+        - "{{a | pow(6) }}"
+        - "{{a | root }}"
+        - "{{a | root(5) }}"
+        

@@ -757,6 +757,54 @@ Use the type_debug filter to display the underlying Python type of a variable. T
 {{ myvar | type_debug }}
 A few useful filters are typically added with each new Ansible release. The development documentation shows how to extend Ansible filters by writing your own as plugins, though in general, we encourage new ones to be added to core so everyone can make use of them.
 ===============================================================>
+example: 
+---
+ - hosts: nodes
+   gather_facts: false
+   vars:
+    x: 1234433
+    z: [2344,5444,5543344,555566555,9908.9,9,89,67]
+    y: 100
+    j: ['adi','krishna','hari',45,6.090,'j',2,'rama',0.99,'venkat]
+   tasks:
+    - debug:
+        msg:
+         - "{{z |random}}"
+         - "{z |random}} * * * * root /script/from/cron"
+         - "{{y |random(step=20) }}"
+         - "{{z | default(89) }}"
+         - "{{y |random(1, 10) }}"
+         - "{{y |random(start=1, step=2) }}"
+         - "{{j | shuffle }}"
+         - "{{x | log }}"
+         - "{{x | log(10) }}"
+         - "{{x | pow(2) }}"
+         - "{{x | pow(9) }}"
+         - "{{x | root }}"
+         - "{{x | root(5) }}"
+-------------------------------------------
+ - hosts: nodes 
+   gather_facts: false 
+   vars: 
+     x: ['krishna','radha',3.4,4,566555,'j','hari',0.466]
+     y: 100
+     z: [2344,5444,5543344,555566555,9908.9,9,89,67]
+     a: 343
+   tasks:
+    - debug:
+       msg:
+        - "{{x |random}}"
+        - "{{z |random}}"
+        - "{{y |random(step=2) }}"
+        - "{{y |random(start=1,step=5) }}"
+        - "{{x | shuffle }}"
+        - "{{a | log }}"
+        - "{{a | log(10) }}"
+        - "{{a | pow(3) }}"
+        - "{{a | pow(6) }}"
+        - "{{a | root }}"
+        - "{{a | root(5) }}"         
+
 
 
 
