@@ -1,0 +1,9 @@
+---
+ - hosts: all
+   tasks:
+   - shell: "python --version"
+     register: python_ver
+   - set_fact:
+      python_version: "{{python_ver.stdout.split('\n')[0].split()[3]}}"
+      myvalue: "python version"
+   - debug: var=python_ver  

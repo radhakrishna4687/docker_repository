@@ -1,0 +1,18 @@
+---
+ - hosts: all 
+   gather_facts: false 
+   vars:
+    x: 'This is about filters and methods'
+    y: '56'
+    z: [2344,5444,5543344,555566555,9908.9,9,89,67]
+   tasks:
+    - debug:
+        msg:
+         - "{{x|lower}}" #lower filter is used for lower letters
+         - "{{x|upper}}"
+         - "{{x|title}}"#jinja syntax
+         - "{{x.lower()}}"#python methods
+         - "{{y|int}}" #python y value is intiall string and it converted in to interger by using y.int()
+         - "the max value of z is : {{z|max}}"
+         - "The min value of z is: {{z|min}}"
+         - "{{x.split()}}"

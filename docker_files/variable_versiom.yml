@@ -1,0 +1,15 @@
+---
+ - hosts: all
+   vars:
+    x: 23456
+    name: "krishnaradha"
+   vars_prompt:
+    name: y
+    prompt: Enter the value for y
+    private: false
+   tasks:
+   - debug:
+      msg:
+       - "the variable vale is {{x}}"
+       - "the name of the student is {{name}}"   
+       - "the var is value is {{y}}"

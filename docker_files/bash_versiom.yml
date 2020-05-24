@@ -1,0 +1,10 @@
+---
+ - hosts: all
+   vars:
+    x: 23456
+    name: "krishnaradha"
+   tasks:
+   - debug:
+      msg:
+       - "the variable vale is {{x}}"
+       - "the name of the student is {{name}}"   

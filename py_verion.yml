@@ -1,0 +1,6 @@
+---
+ - hosts: all
+   tasks:
+   - shell: "python --version"
+     register: python_ver
+   - debug: var=python_ver  

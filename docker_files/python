@@ -1,0 +1,3 @@
+d=str(input("docker exec -itd "))
+print(d)
+

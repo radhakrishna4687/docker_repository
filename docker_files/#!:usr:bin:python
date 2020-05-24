@@ -1,0 +1,3 @@
+#!/usr/bin/python
+
+docker = str(input("docker exec -itd"))

@@ -1,0 +1,292 @@
+ansible_notes:
+--------------
+Creating the variables:
+-------------------------
+variables: means it stores the data vales in avriables
+Data Types:
+1.int(x: 34)
+foat(x: 34.456)
+string(myname: "radhakrishna", my_name; radhakrishna)
+bool( x: true, y:false, z: True, p: False, q: yes, q: no)
+------------
+---> Ansible data structures and data collection:
+Data sructre or dtat collections:
+--> are used to store multiple data/values.
+1.scalar
+2.sequence or list[]
+3.dictionay or mappping
+--> i want to install multiple pkgs:
+example:
+---
+ - hosts: all 
+   vars:
+    x: 345
+    pakgs: ['vim', 'nano', 'nginx'] #list
+    web_server: {'linux', 'apache2', 'ubuntu'} #web_server is variable and it is dictionary  or mapping 
+    
+    format
+   tasks:
+   - debug: var=pakgs
+   - debug: var=web_server 
+--------------------------------------------------
+By  using register and set_facts to find out the bash in linux mchine :
+
+Register:
+by using the register key to store the values: by executing the tasks
+ex: tasks:
+   - shell: "bash --version"
+   #to store the varianble in registre keys:
+and then assing the value to store used thr register key: ex: 
+
+  register: bash_var #here to store the value in register key is bash_var
+  #but it not showing the output,
+   Debug moduleis used to print the output: in that case used the debug module to printout output
+   - debug: var=bash_var    
+==========================================
+--
+ - hosts: all
+   gather_facts: no
+   tasks:
+   - shell: "bash --version"
+   #to store the varianble in registre keys:
+     register: bash_var #here to store the value in register key is bash_var
+  #but it not showing the output,in that case used the debug module to printout output
+   - debug: var=bash_var.stdout.split("\n")[0].split()
+   # here using the python split module for required outputs using split('\n')[0](#indexnumber).split() for space
+
+#here always write a  long sytax like var=bash_var.stdout.split("\n")[0].split() 
+#insted fo these one create the variablea ans store the variable value into it. by using set fact
+==================================================================
+set_fact module is used to define a new variables
+---
+ - hosts: all
+   gather_facts: no
+   tasks:
+   - shell: "bash --version"
+   #to store the varianble in registre keys:
+     register: bash_var #here to store the value in register key is bash_var
+   #here always write a  long sytax like var=bash_var.stdout.split("\n")[0].split() 
+#insted fo these one create the variablea ans store the variable value into it. by using set fact
+#set_facts: used for making simple variables
+  - set_facts:
+      bash_version: {bash_var.stdout.split("\n")[0].split()[3]} 
+  
+  #but it not showing the output,in that case used the debug module 
+  to printout output
+  # here using the python split module for required outputs using split('\n')[0](#indexnumber).split() for space
+
+   - debug: var=bash_version
+   -----------------------------
+   How to read and print variable using ansible playbooks?
+   Ans by using vars module and debug for print variable.
+   example:
+
+  ---
+ - hosts: all
+   vars:
+    x: 23456
+    name: "krishnaradha"
+   tasks:
+   - debug:
+      msg:
+       - "the variable vale is {{x}}"
+       - "the name of the student is {{name}}"   
+===============================================
+Dynamic allocation of variable to read the variable values whie running a process by using vars_prompt
+example: 
+--
+ - hosts: all
+   vars:
+    x: 23456
+    name: "krishnaradha"
+   vars_prompt:
+    name: y
+    prompt: Enter the value for y
+    private: false
+   tasks:
+   - debug:
+      msg:
+       - "the variable vale is {{x}}"
+       - "the name of the student is {{name}}"   
+       - "the var is value is {{y}}"
+-----------------------------------------------------
+example: foe suppose i want to enter the values fo user name ans password while running the ansible-playbooks.
+Here the var_prompt is important 
+and prompt key word is importnant to display runtime 
+
+---
+ - hosts: all
+   vars_prompt:
+    - name: user_name
+      prompt: Enter Username 
+      private: false
+    - name: password
+      prompt: Enter the password
+      private: yes
+   tasks:
+   - debug:
+      msg: "THe username is: {{user_name}} and the password is: {{password}}"
+ ------------------------------
+ how to reading variables from file
+
+ Types of files:
+ 1.Ymal files
+ 2.JSON files
+
+ =>read variables from multiple files
+ ex:
+ for example one json data file and ymail file 
+1.the json data file and ymal file to read the ansible playbooks by using the module vars_files : filenames
+example: json data file
+{
+  "a": 976,
+  "b": [1,2,3,4,"krishns","radha"],
+  "c": {"radha":1,"krishna":2,"rama":4,"j":"radhakrishna"}
+}     
+Ansible playbook
+
+---
+ - hosts: all
+   vars_files: 
+   - var_value.yml
+   - var.json
+   tasks:
+    - debug: var=c
+#here the c is the variable to read the data to stored the values in json.
+by uisng debug module(print)--> var-> variable call the particular variable data
+------------------------------------------------------
+Working with command line arguments:
+The variables can be define by different ways:
+1.vars 2.vars_prompt 3.vars_files.
+Differnt tpes of passed the arguments:
+1,scalar 2,sequnce(list) 3,map(dict) 4.files with variables
+
+By using diifent  procedures:
+
+Example; 1.ansible-playbooks cmd_line.yml -e "x=2345" #shortcut 
+2. ansible-playbooks cmd_line.yml --extra-var x=123 
+3. ansible-playbooks cmd_line.yml -e "{'x'=2344,'y'=987864}"
+nsible-playbooks cmd_line.yml -e "x='radhakrishna'"
+
+Multiple varaible from command lines:
+ansible-playbooks cmd_line.yml -e "{'x': 234, 'y': 34}"
+
+Sequnce values:(list)
+ansible-playbooks cm.yml -e "{'x': [1,3,'radha',8,90,'krishna'}"
+ 
+ map:(dict):
+ansible-playbooks cm.yml -e "{'x': 'krishna', 'one': 1}"
+===========================
+By command line to pass the variable values :
+example to install the pkg like nginx and apache2 servers by uing command line arguments passing methed
+
+reading_vars.yml
+| | |
+---
+
+---
+ - name: This is a sample playbooks to undestand the command line arguments
+   hosts: web
+   gather_facts: false
+  # become: yes
+   tasks:
+   - name: Install and working with  {{pkg}} (state=present is optional)
+     apt:
+       name: "{{pkg}}"
+       state: {{req_state}}"
+
+================================
+comnad: ansible-playbooks  reading_vars.yml -e "pkg=nginx req_state=present"sing 
+
+Working with gather facts variable or setup varmodule
+ Using of gatherfacs ,how tocollect information about remote hosts with gatherfacts
+ examples;
+ 
+ ---
+ - name: Finding the os name and distribution
+   hosts: all
+   gather_facts: no
+   tasks:
+   - name: finding the os distribution
+     shell: cat /etc/os-release | awk -F 'NR==1 {print $2 }' | awk '{print $1}' | tr '\"' ' '"
+     register: os_dist
+   - name: Finding the os name
+     shell: "uname"
+     register: os_name
+   - debug:
+      msg:
+       - "The os distribution name is : {{os_dist}}"
+       - "The os name is : {{os_name}}"    
+----------------------------------------------
+Arthmetic operations:
+ Arthmetics opetarion can be done by using Ansible with Jinja syntax.
+Example:
+ ---
+ - name: Arthematic operations examples
+   hosts: all 
+   gather_facts: false 
+   vars_prompt:
+    - name: a 
+      prompt: Enetr the a values 
+      private: no 
+    - name: b 
+      prompt: Enter the b values 
+      private: no
+   tasks:
+   - debug: 
+        msg:   
+        - 'The vale of a is : {{a}}'
+        - 'The value of b is : {{b}}'
+        - 'The addition of {{a}} and {{b}} is {{a|int+b|int}}' # Integet value only assing 
+        - 'The addition of {{a}} and {{b}} is {{a|int*b|int}}'
+ 
+--------------------------------------------------------
+Filters and methods in ansible playbooks:
+1.filters and methods are the operational of ansible,
+2.Ansible inbuilt filteres(Jinja filters)
+Note: if you find your required opetations use python methods
+3.Python methods
+4.Use | --> this pipeline symbol for inbuilt /jinja2 filters
+5.Use . --> For python methods
+
+Example: 
+---
+ - hosts: all 
+   gather_facts: false 
+   vars:
+    x: 'This is about filters and methods'
+    y: '56'
+    z: [2344,5444,5543344,555566555,9908.9,9,89,67]
+   tasks:
+   - debug:
+       msg:
+         - "{{x|lower}}" #lower filter is used for lower letters
+         - "{{x|upper}}"
+         - "{{x|title}}"#jinja syntax
+         - "{{x.lower()}}"#python methods
+         - "{{y.int()}}" #python y value is intiall string and it converted in to interger by using y.int()
+         - "the max value of z is : {{z.max()}}"
+         -"The min value of z is: {{z.min()}}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

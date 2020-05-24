@@ -1,0 +1,10 @@
+---
+ - name: This is a sample playbooks to undestand the command line arguments
+   hosts: web
+   gather_facts: false
+  # become: yes
+   tasks:
+   - name: Install and working with  {{pkg}} (state=present is optional)
+     apt:
+       name: "{{pkg}}"
+       state: {{req_state}}"

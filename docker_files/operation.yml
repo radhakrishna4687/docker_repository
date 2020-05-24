@@ -1,0 +1,14 @@
+---
+ - name: Play for Arithematic operations
+   hosts: all 
+   gather_facts: false
+   var:
+    x: 45 
+    y: 435
+   tasks: 
+   - name: displaying values 
+   - debug:
+      msg:
+      - "the value of x is: {{x}}"
+      - "The value of y is: {{y}}" 
+      - "{{x}} + {{y}} = {{x+y}}"

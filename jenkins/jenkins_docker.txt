@@ -1,0 +1,21 @@
+Dockerfile for jenkins:
+step1: Running os
+step2: Install Java
+step3: export JAVA_HOME
+step4: download Tomcat tar ball
+step5: Extract Tocat tar ball
+step6: Change the default port number
+step7: Download jenkis.warfile to webapp
+step8: star Tomcat by Catalina.sh --> run
+------> .docker image consist of some layers
+
+1.Creating jenkins image 
+2.#creating the jenkis image
+#step1: base is os 
+step2: Using RUN command to execute the commands install java, tomact etc 
+----> apt-get update -y
+      apt-get install openjdk-8-jre -y
+
+3.Java defaluute hame os  is /usr/bin/java
+4. Download tarball using docker file as ADD 
+5.

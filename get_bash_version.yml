@@ -1,9 +1,11 @@
 ---
  - hosts: all
+   gather_facts: no
    tasks:
    - shell: "bash --version"
    #to store the varianble in registre keys:
      register: bash_var #here to store the value in register key is bash_var
+   - set_fact:
+      bash_version: "{{bash_var.stdout.split('\n')[0].split()[3]}"
   #but it not showing the output,in that case used the debug module to printout output
-   - debug: var=bash_var     
- 
+   - debug: var=bash_version
