@@ -10,6 +10,7 @@
      x: 90
      name: 'ansible'
      my_path: '/Users/krishnar/GoogleDrive/docker_notes\membership.yml'
+     my_link_path : '/Users/krishnar/GoogleDrive/docker_notes\membership.yml'
    tasks:
     - debug:
         msg:
@@ -25,5 +26,8 @@
          - 'x is number: {{x is number }}'
          - 'The given path is {{my_path}}'
          - 'my_path is file: {{my_path is file}}'
-         - ''
+         - 'my_path is directory: {{ my_path is directory}}'
+         - 'my_path is exists: {{ my_path is exists }}'
+         - ' my_link_path is link: {{ my_link_path is link }}'
+
 
