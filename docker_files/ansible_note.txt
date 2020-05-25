@@ -803,11 +803,30 @@ example:
         - "{{a | pow(3) }}"
         - "{{a | pow(6) }}"
         - "{{a | root }}"
-        - "{{a | root(5) }}"         
+        - "{{a | root(5) }}"
 
-
-
-
+--------------------------------------------------------------------------------------
+comparisiion ooperators:
+1,>,<,==,!=,<=,>= ....etc
+1.These are very impoertnat to work with conditional operators
+2.The result of compariosn operators is either tru or false .only
+example: 
+---
+ - hosts: all
+   gather_facts: fals
+   vars:
+     x: 6
+     y: 10
+   tasks: 
+    - debug:
+        msg: 
+         - "The vale of x is {{X}} and value if y is {{y}}"   
+         - "{x ==y}: {{x == y }}"
+         - "{x > y}: {{x > y }}"
+         - "{x != y}: {{x != y }}"
+         - "{x >= y}: {{x >= y }}"
+          - "{x <=y}: {{x <=y }}"
+========================================================
 
 
 
