@@ -9,8 +9,13 @@
     #  - 43
      # - 9
      # - 87
-    y: 989788
+    y: 45
+    z: 232333
    tasks:
     - debug:
         msg:
           - 'the list of squence x is {{x}} and y value is: {{y}}'
+          - 'y is in x: {{y in x}}'
+          - '23 in x: {{23 in x}}'
+          - 'z in x: {{z in x}}'
+
