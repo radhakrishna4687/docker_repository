@@ -1,0 +1,29 @@
+#test for variables (is defined and is undefined)
+#Test for string(strx is lower ,strx is upper, strx is string)
+#Test for numbers(numx is divided by 5, is odd,is evevn, is number )
+#test operators with paths(path1 is directory , path2 is file, path3 is link, path1 is exits, path 2 is same_file(path4))
+---
+ - name: This is about Test opertors
+   hosts: all
+   gather_facts: false 
+   vars:
+     x: 90
+     name: 'ansible'
+     my_path: '/Users/krishnar/GoogleDrive/docker_notes\membership.yml'
+   tasks:
+    - debug:
+        msg:
+         - 'x is defined: {{ x is defined }}'  
+         - 'y is defined: {{ y is defined }}' 
+         - 'z is undefined: {{ z is undefined }}' 
+         - 'name is upper: {{ name is upper }}'
+         - 'name is lower: {{ name is lower }}' 
+         - 'name is string: {{ name is string }}'  
+         - 'x is divisibleby 2: {{ x is divisibleby 2}}'
+         - 'x is even: {{ x is even }}'
+         - 'x is odd: {{ x is odd }} '
+         - 'x is number: {{x is number }}'
+         - 'The given path is {{my_path}}'
+         - 'my_path is file: {{my_path is file}}'
+         - ''
+
