@@ -18,4 +18,7 @@
           - 'y is in x: {{y in x}}'
           - '23 in x: {{23 in x}}'
           - 'z in x: {{z in x}}'
+          - 'y is not in x: {{y not in x}}'
+          - '23 in x: {{23 not in x}}'
+          - 'z in x: {{z not in x}}'
 
