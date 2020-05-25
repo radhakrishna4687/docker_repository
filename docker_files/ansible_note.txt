@@ -827,6 +827,25 @@ example:
          - "{x >= y}: {{x >= y }}"
           - "{x <=y}: {{x <=y }}"
 ========================================================
+membership and test operators of ansible playbooks
+ 1.in 2 not in
+
+ example: ---
+ - name: This is about membership operators
+   hosts: all 
+   gather_facts: false 
+   vars:
+     x: [3,45,6443,355,43,2,5,6,7,0] #here like this we can use like python or used jinja syntax show likes belows 
+  #  x: 
+   #   - 23
+    #  - 43
+     # - 9
+     # - 87
+    y: 989788
+   tasks:
+    - debug:
+        msg:
+          - 'the list of squence x is {{x}} and y value is: {{y}}'
 
 
 
