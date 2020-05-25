@@ -9,8 +9,8 @@
    vars:
      x: 90
      name: 'ansible'
-     my_path: '/Users/krishnar/GoogleDrive/docker_notes\membership.yml'
-     my_link_path : '/Users/krishnar/GoogleDrive/docker_notes\membership.yml'
+     my_path: '/Users/krishnar/GoogleDrive/docker_notes/membership.yml'
+     my_link_path : '/Users/krishnar/GoogleDrive/docker_notes/membership.yml'
    tasks:
     - debug:
         msg:
