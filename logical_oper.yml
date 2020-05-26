@@ -1,0 +1,13 @@
+#logical operater havimg or,and and not operations.
+---
+ - hosts: all 
+   gather_facts: false
+   vars:
+    x: 5
+    y: 9
+    z: [4,6,8]
+   tasks:
+    - debug:
+       msg:
+        - 'The value odf x is {{x}}, the value of y is {{y}, the value if z {{z}}'
+        - 'x < y: {{x<y and y in p}}'
