@@ -849,6 +849,8 @@ membership and test operators of ansible playbooks
 
 =====================================================================
 --> 
+How to use conditional staements
+1.when,2.failed_when,3.chnaged_when
 
 
 

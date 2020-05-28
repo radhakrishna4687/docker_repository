@@ -1,0 +1,6 @@
+---
+ - name: Simple paly for install apache 
+   hosts: nodes,web
+   gather_facts: false
+   tasks: 
+    -

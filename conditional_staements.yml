@@ -1,0 +1,15 @@
+---
+ - name: working with conditional statements
+   hosts: all 
+   gather_facts: false 
+   vars: 
+     x: 5
+     y: 67
+     my_list: [5,34,7]
+   tasks:
+     - debug:
+          msg: "The value of x is {{x}} and y is {{y}}" 
+       when: x == y 
+     - debug:
+          msg: 'x is present in my list'
+       when: x in my_list        
