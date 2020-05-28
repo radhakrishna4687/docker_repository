@@ -1,0 +1,14 @@
+---
+ - name: Simaple usage of inline conditional (if else)
+   hosts: all
+   gather_facts: false 
+   vars:
+      x: 45
+      y: 8
+   tasks:
+      - debug:
+           msg: 'The large number {{x}} and  {{y}} is : x'
+        when: x > y
+      - debug:
+           msg: The large nimber of {{x}} and {{y}} is : y'
+                

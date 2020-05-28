@@ -853,6 +853,30 @@ How to use conditional staements
 1.when,2.failed_when,3.chnaged_when
 
 
+--> contional opetations 
+example;
+
+---
+ - name: Simple paly for install apache 
+   hosts: nodes
+   gather_facts: false
+   tasks: 
+      - name: Installing httpd  using YUM 
+        yum:
+          name: httpd
+          state: latest
+        when: ansible_distribution != "Ubuntu"  
+      - name:
+        apt:
+          name: apache2 
+          update_cache: yes 
+          state: latest
+        when: ansible_distribution == "Ubuntu"  
+
+  ---> Inline conditional staements
+        
+
+
 
 
 
