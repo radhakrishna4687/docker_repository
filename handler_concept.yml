@@ -5,13 +5,15 @@
       - name: Installing apache2
         apt:
           name: apache2 
-          state: latest
+          state: present 
         notify: 
           - start apache2
    handlers:
       - name: start apache2 
         service: 
-          name: 
+          name: apache2 
+          state: started 
+
 
                
         #register: out 

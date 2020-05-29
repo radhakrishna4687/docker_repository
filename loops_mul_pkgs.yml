@@ -1,0 +1,15 @@
+---
+ - name: Usinhg loops 
+   hosts: all
+   gather_facts: false 
+   tasks:
+      - apt:
+          name: '{{item}}' 
+          state: present
+      
+     # - debug:
+           #msg: 'The current pkg is: {{item}}'
+        loop:
+           - git 
+           - java8
+           - nginx 
