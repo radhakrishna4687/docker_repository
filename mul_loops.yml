@@ -1,0 +1,24 @@
+---
+ - name: Installing multiple softwares at  a tim by using the loops 
+   hosts: all
+   gather_facts false 
+   tasks:
+      - apt: 
+          name: '{{item}}'
+          state: present
+      - debug: 
+          msg: ' THe current pkg is: {{item}}'
+        loop:
+          - git 
+          - oracle-java11-installer
+          - tomcat 
+   tasks:
+      - name: 'Get software versions list'
+        shell:
+          name: '{{item}}'
+     # - debug: 
+       #   msg: 'The swft versions is: {{item}}'
+        loop:
+          - git --version
+          - java --version 
+          - tomcat --version 
