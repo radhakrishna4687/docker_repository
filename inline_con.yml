@@ -5,10 +5,13 @@
    vars:
       x: 45
       y: 8
+      larger: "{{ x if {x > y} else y}}"
    tasks:
       - debug:
-           msg: 'The large number {{x}} and  {{y}} is : x'
-        when: x > y
-      - debug:
-           msg: The large nimber of {{x}} and {{y}} is : y'
+            msg; '{{larger}}'
+          # msg: ' {{x}} and {{y}} is: {{ x if {x > y} else y}}'
+           #msg: 'The large number {{x}} and  {{y}} is : x'
+        #when: x > y
+      #- debug:
+          # msg:  'The large nimber of {{x}} and {{y}} is : y'
                 
