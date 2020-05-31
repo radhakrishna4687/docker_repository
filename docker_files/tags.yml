@@ -1,0 +1,31 @@
+# ansible-playbook tags.yml --tags first --> tags as first only executes  -t or --tags to skipped tags = --skip-tags first
+#Never use for don't run the particular tasks,untill unless calll the particular tassks
+#always executing the default tasks
+---
+ - hosts: all 
+   gather_facts: false 
+   tasks:
+     - debug:
+         msg: 'The is the first task'
+       tags: 
+         - first
+         - never  
+     - debug:
+         msg: 'The is the second task'
+       tags: 
+         - second 
+         - always #execute by default    
+     - debug:
+         msg: 'The is the third task'
+       tags: third    
+     - debug:
+         msg: 'The is the fourth task' 
+       tags: 
+         - fourth 
+         - never
+     - debug:
+         msg: 'The is the fifth task'
+       tags: fifth   
+     - debug:
+         msg: 'The is the sixth task'       
+       tags: sixth  

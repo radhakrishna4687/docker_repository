@@ -874,6 +874,58 @@ example;
         when: ansible_distribution == "Ubuntu"  
 
   ---> Inline conditional staements
+when and if else conditions
+============================
+Handlers:
+ex:
+  ---
+ - hosts: nodes
+   gather_facts: false
+   tasks: 
+      - name: Installing apache2
+        apt:
+          name: apache2 
+          state: present 
+        notify: 
+          - start apache2
+   handlers:
+      - name: start apache2 
+        service: 
+          name: apache2 
+          state: started 
+
+
+               
+        #register: out 
+      #- debug: var = out.changed  
+      #- name: start apache2 
+       # service:  
+        #  name: apache2 
+         # state: started
+        #when: out.changed == True 
+ ------------------------------------------
+ -->loops
+ ex: 
+ ---
+ - name: Usinhg loops 
+   hosts: all
+   gather_facts: false 
+   tasks:
+      - apt:
+          name: '{{item}}' 
+          state: present
+      
+     # - debug:
+           #msg: 'The current pkg is: {{item}}'
+        loop:
+           - git 
+           - java8
+           - nginx 
+-------------------------------------
+-->working with ansible tags:
+
+
+
         
 
 
