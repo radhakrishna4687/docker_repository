@@ -1,0 +1,11 @@
+---
+ - hosts: all 
+   gather_facts: false 
+   tasks:
+      - command: 'ls /home'
+        register: home_out
+      - debug: var=home_out
+      - command: 'ls /tmp'
+        register: tmp_out
+      - debug: var=tmp_out  
+        
