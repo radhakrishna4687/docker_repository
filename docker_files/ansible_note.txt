@@ -962,6 +962,17 @@ example:
 -->1. Ansible normally has defaults that makes sure to check the returns code od commands /modues and it fails retrun code non zero
 ---->2. Ifthe current task fails thn playbook will stop the executing the remaining tasks on the hosts
 
+---
+ - hosts: all 
+   gather_facts: false 
+   tasks:
+      - command: 'ls /home'
+        register: home_out
+      - debug: var=home_out
+      - command: 'ls /tmp'
+        register: tmp_out
+      - debug: var=tmp_out  
+ ===============================================       
 
 
 
