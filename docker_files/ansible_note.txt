@@ -960,19 +960,22 @@ example:
 ====>Error Hnadlings
 
 -->1. Ansible normally has defaults that makes sure to check the returns code od commands /modues and it fails retrun code non zero
----->2. Ifthe current task fails thn playbook will stop the executing the remaining tasks on the hosts
+---->2. Ifthe current task fails thn playbook will stop the executing the remaining tasks on the hosts by ignoring the particular task and executes next 
+ignore_errors: yes
 
 ---
+ ---
  - hosts: all 
    gather_facts: false 
    tasks:
       - command: 'ls /home'
-        register: home_out
+        register: home_out #capture the outputs used ffor home_out--> variable
+        ignore_errors: yes  
       - debug: var=home_out
       - command: 'ls /tmp'
         register: tmp_out
-      - debug: var=tmp_out  
- ===============================================       
+      - debug: var=tmp_out   #to dispaly this output
+  =======================      =================== 
 
 
 
