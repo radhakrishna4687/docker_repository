@@ -976,6 +976,28 @@ ignore_errors: yes
         register: tmp_out
       - debug: var=tmp_out   #to dispaly this output
   =======================      =================== 
+#Error handling with blocks and rescue in playbooks
+Ans: Ansible stops playbooks to executes on the task failure ans we canchoose to ignore_errors to continue with remianing tasks.
+ NOte: ansible execute a tasks ,in some cases if one task is failure, the remining tasks are not executes,
+ by sovling these problem we can used the module of ignore_errors: yes 
+ It will be ignore the fist task, if failure , the reminig tasks are executes.
+
+ ignore_errors for a entier block example:
+
+ ---
+ - hosts: all 
+   gather_facts: false 
+   tasks:
+      - block:
+         - command: 'ls /home/tomcat7'
+           register: tomcat7_out  
+         - command: 'ls /home/tomcat8'
+           register: tomcat8_out
+        ignore_errors: yes 
+      - debug: var=tomcat7_out  
+      - debug; var=tomcat8_out
+         
+     ===================================
 
 
 
