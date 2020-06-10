@@ -999,6 +999,28 @@ Ans: Ansible stops playbooks to executes on the task failure ans we canchoose to
          
      ===================================
 
+In playbooks {block,rescue,always}
+
+--- 
+ - hosts: nodes 
+   gather_facts: false 
+   tasks:
+      - block:
+          - name: Finging the files in /home/var/tomcat8
+            command: "ls /home/var/tomcat8"
+            register: tomcat8_out
+        rescue:
+           - debug: 
+                msg: "The given pathe is not valid"    
+        always:
+           - debug:
+                msg: "always executes" 
+
+=============================
+1. here the bloc will be failure it will be executes the rescue 
+2. alwys executes every time either may be execute r=the task or failure the tasks
+=======================================================================================
+Ansible reusable concept in import and include 
 
 
 
