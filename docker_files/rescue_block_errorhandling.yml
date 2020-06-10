@@ -1,0 +1,7 @@
+--- 
+ - hosts: nodes 
+   gather_facts: false 
+   tasks:
+      - block:
+          - name: Finging the files in /home/var/tomcat8
+            command
