@@ -1022,6 +1022,60 @@ In playbooks {block,rescue,always}
 =======================================================================================
 Ansible reusable concept in import and include 
 
+---
+ - name: Simple play to install multiple pkgs 
+   hosts: all 
+   gather_facts: false 
+   tasks:
+     - block: 
+        - name: Installing webserver on redhat familly 
+          yum: 
+            name: httpd 
+            state: present 
+        - name: Installing Java on redhat family
+          yum:
+            name: java-1.8.0-openjdk
+            state: present    
+          when: ansible_os_family=="RedHat"
+     - block:     
+        - name: Installing the websever for Debian severs 
+          apt: 
+            name: apache2 
+            state: present
+        - name: Installing java  on Debain family
+            name: openjdk-8-jdk
+            state: present      
+          when: ansible_os_family=="Debian"
+===============================================
+
+Playbooks:
+
+---
+ - hosts: all 
+   gather_facts: false 
+   tasks:
+     - importtasks: web.yml
+       when: ansible_os_family =="RedHat"
+     - importtasks: java.yml
+       when: ansible_os_family =="Debian"
+      - importtasks: apache2.yml
+       when: ansible_os_family =="RedHat"
+ ============================================
+ import tasks: --->  statics 
+ include: --> Dynamic
+
+---
+ - hosts: all 
+   gather_facts: false 
+   tasks:
+     - include_tasks: web_{{ansible_os_family}}.yml
+     - include_tasks: java_{{ansible_os_family}}.yml 
+
+===================================
+Ansible has following modules for impoer and include
+   -->. import_playbook,import_tasks,import_vars,import_roles
+   --->. include_playbook,include_tasks,include_vars,include_role
+   
 
 
         
