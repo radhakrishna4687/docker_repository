@@ -1,0 +1,14 @@
+--- 
+  - name: Discover play 
+    hosts: all 
+    gather_facts: true 
+    tasks: 
+       - name: Finding os name 
+         shell: "uname"
+         register: os_name 
+       - name: Finding uptime 
+         shell: 'uptime'
+         register: up_time 
+       - name: Display Discovery info 
+         debug:  
+            msg: "{{inventory_hostname}} {{os_name.stdout}} {{up_time.split(',')[0].split('up')[-1]}}"

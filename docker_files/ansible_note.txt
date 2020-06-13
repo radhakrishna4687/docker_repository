@@ -1075,8 +1075,20 @@ Playbooks:
 Ansible has following modules for impoer and include
    -->. import_playbook,import_tasks,import_vars,import_roles
    --->. include_playbook,include_tasks,include_vars,include_role
+example:
+---
+  - name: Simple play tounderstand import_vars and include_vars 
+    hosts: nodes 
+    gather_facts: true 
+    tasks: 
+       - include_vars: required_var_{{ansible_os_family}}.yml
+       - debug: 
+           msg: "Pkg name = {{pkg}}"  
    
-
+========================================
+Usage of delegate_to, run_once and local_action in ansible playbooks:
+note: discovery script 
+---:>> discovery script :-> it will be genartaed by the csv file.
 
         
 
