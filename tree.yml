@@ -1,0 +1,14 @@
+---  
+ -  hosts: all 
+    tasks:
+    - name: find who is executing 
+      command: whoami 
+      shell: ifconfig 
+    - name: ping all servers 
+      ping: 
+    - name: find out current directory 
+      command: pwd 
+    - name: installing tree 
+      yum: 
+        name: tree 
+        state: present       

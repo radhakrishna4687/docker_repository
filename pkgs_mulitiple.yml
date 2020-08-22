@@ -1,0 +1,30 @@
+---
+ - name: Simple play to install multiple pkgs 
+   hosts: all 
+   become: yes
+   gather_facts: false 
+   tasks:
+     - block: 
+        - name: Installing webserver on redhat familly 
+          yum: 
+            name: httpd 
+            state: present
+        # command: 'rm -f /var/lib/dpkg/lock-frontend'
+        # command: 'rm -f /var/lib/dpkg/lock'' 
+        - name: Installing Java on redhat family
+          yum:
+            name: java-1.8.0-openjdk
+            state: present    
+          when: ansible_os_family=="RedHat"
+     - block:     
+        - name: Installing the websever for Debian severs 
+          apt: 
+            name: apache2 
+            state: present
+        # command: 'rm -f /var/lib/dpkg/lock-frontend'
+        # command: 'rm -f /var/lib/dpkg/lock''
+        - name: Installing java  on Debain family
+          apt:
+            name: openjdk-8-jdk
+            state: present      
+          when: ansible_os_family=="Debian"

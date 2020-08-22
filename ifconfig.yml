@@ -1,0 +1,7 @@
+---
+  - name: To check ifconfig commnad from all servers 
+    hosts: all 
+    gather_facts: true 
+    tasks: 
+       - name: Checking ifconfig command fro all servers 
+         shell: 'ifconfig'

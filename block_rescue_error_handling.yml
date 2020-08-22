@@ -1,0 +1,14 @@
+--- 
+ - hosts: nodes 
+   gather_facts: false 
+   tasks:
+      - block:
+          - name: Finging the files in /home/var/tomcat8
+            command: "ls /home/var/tomcat8"
+            register: tomcat8_out
+        rescue:
+          - debug: 
+                msg: "The given pathe is not valid"    
+        always:
+          - debug:
+                msg: "This wiil be always executes"

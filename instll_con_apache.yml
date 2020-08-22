@@ -1,0 +1,23 @@
+---
+ - name: Install and configure apache server 
+   hosts: webservers
+   gather_facts: yes 
+   tasks:
+      - name: Install apache2 
+        apt: 
+          name: apache2 
+          state: latest
+          update_cache: yes 
+      - template: 
+            src: index.html.j2
+            dest: /usr/share/
+      - name: enable mod_rewrite
+        apache2_module: name=rewrite state=present
+        notify:
+           - restart apache2 
+      - name: Starting apache2  service 
+    handlers:
+      - name: restart apache2
+        service: name=apache2 state=restarted          
+      - name: Apache2 service status to checking 
+        shell: 'service apache2 status && echo Apache is install and run successfully '

@@ -1,0 +1,8 @@
+---
+ - hosts: nodes 
+   gather_facts: true 
+   tasks: 
+      - shell: "uptime"
+        register: up_time
+        delegate_to: 172.17.0.3 
+      - debug: var=up_time 

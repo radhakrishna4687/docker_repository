@@ -1,0 +1,12 @@
+---
+ - hosts: nodes 
+   gather_facts: false 
+   tasks:
+      - command: 'ls /homeswww'
+        register: home_out #capture the outputs used ffor home_out--> variable
+        ignore_errors: yes 
+      - debug: var=home_out
+      - command: 'ls /tmp'
+        register: tmp_out
+      - debug: var=tmp_out   #to dispaly this output
+        

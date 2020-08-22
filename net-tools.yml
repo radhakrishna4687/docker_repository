@@ -1,0 +1,17 @@
+---
+  - name: Installing te net-tools for using ifconfig commnad is not working
+    hosts: all 
+    gather_facts: true 
+    tasks:
+      - block:
+          - name: Install net-tools on Redhat-familly 
+            yum: 
+              name: net-tools 
+              state: latest 
+            when: ansible_os_family=="RedHat" 
+      - block:
+          - name: Install net-tools on Debian family 
+            apt: 
+              name: net-tools 
+              state: latest 
+            when: ansible_os_family=="Debian"  

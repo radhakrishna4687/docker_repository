@@ -1,9 +1,13 @@
 #!/usr/bin/ansible-playbook
-- hosts: all
+- hosts: webservers
   #become: yes
   tasks:
-  - name: Installing nano editor
-    apt: name=vim state=present
+#  - name: Installing nano editor
+#    apt: name=vim state=latest
   - name: Installing httpd
-    apt: name=httpd state=latest
-    
+    apt: name=apache2 state=latest
+  - name: Ensure Apache servers is running 
+    service:
+      name: apache2
+      state: started 
+      enabled: yes    

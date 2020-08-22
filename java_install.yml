@@ -1,0 +1,16 @@
+---
+  - name: Installing java 8
+    hosts: webservers
+    gather_facts: true 
+    tasks: 
+       - name: Updte APT package manager repositories caches 
+         apt:
+           update_cache: true
+       - name: Install OpenJDK Java 
+         apt: 
+           name: openjdk-8-jdk 
+           state: present 
+       - name:
+         shell: 'javac -version && java -version' 
+         register: out_put 
+       - debug: var=out_put  

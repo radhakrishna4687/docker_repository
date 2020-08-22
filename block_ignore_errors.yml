@@ -1,0 +1,14 @@
+
+---
+ - hosts: all 
+   gather_facts: false 
+   tasks:
+      - block:
+         - command: 'ls /home/tomcat7'
+           register: tomcat7_out   
+         - command: 'ls /home/tomcat8'
+           register: tomcat8_out
+        ignore_errors: yes
+ 
+#      - debug: var=tomcat7_out  
+ #     - debug; var=tomcat8_out   

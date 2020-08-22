@@ -1,0 +1,8 @@
+---
+  - name: move tomcat to latest folder in /usr/local/latest 
+    hosts: webservers
+    gather_facts: flase 
+    tasks: 
+#run a tomcat using shell command  to check java is running ps -ef | grep java 
+       - name: Starting tomcat 
+         shell: nohup /usr/local/latest/apache-tomcat-9.0.36/bin/startup.sh &  
