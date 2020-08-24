@@ -1,0 +1,2 @@
+Server_name, OS Family, Os Name, OS Distribution, uptime
+{inventory_hostname}},Debian,Ubuntu,Linux,Linux,  2:50

@@ -1,0 +1,31 @@
+--- 
+ - hosts: all 
+   become: yes 
+   gather_facts: yes 
+   tasks: 
+     - name: Finding os name 
+       shell: "uname"
+       register: os_name 
+     - name: Finding up time 
+       shell: "uptime"
+       register: up_time
+     - name: Display discovrey info 
+       debug: 
+         msg: "{{inventory_hostname}},{{ansible_os_family}},{{ansible_distribution}},{{ansible_system}},{{os_name.stdout}},{{up_time.stdout.split(',')[0].split('up')[-1]}}"
+     - name: Removing old discover.csv file 
+       file:
+         dest: /etc/ansible/playbooks/Discovery_scripts/Discovery.csv 
+         state: absent 
+       delegate_to: 172.17.0.2
+       run_once: true
+     - name: Creating  Discovery.csv file header will be created.
+       copy:
+         dest: /etc/ansible/playbooks/Discovery_scripts/Discovery.csv  
+         content: "Server_name, OS Family, Os Name, OS Distribution, uptime\n"
+       delegate_to: 172.17.0.2
+       run_once: true
+     - name: Updating info of eachserver in csv file 
+       lineinfile:
+         path: /etc/ansible/playbooks/Discovery_scripts/Discovery.csv
+         line: "{inventory_hostname}},{{ansible_os_family}},{{ansible_distribution}},{{ansible_system}},{{os_name.stdout}},{{up_time.stdout.split(',')[0].split('up')[-1]}}"
+       delegate_to: 172.17.0.2
