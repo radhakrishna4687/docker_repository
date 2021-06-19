@@ -1,5 +1,5 @@
 #Get a base image ubuntu, if we want to use empty image use SCRATCH
-FROM ubuntu
+FROM ubuntu:groovy-20210614
 
 MAINTAINER radhakrishna <devopskrishna11@gmail.com> #optional
 
