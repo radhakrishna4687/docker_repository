@@ -1,5 +1,5 @@
 #Get a base image ubuntu, if we want to use empty image use SCRATCH
-FROM ubuntu
+FROM ubuntu:20.04
 
 MAINTAINER radhakrishna <devopskrishna11@gmail.com> #optional
 
